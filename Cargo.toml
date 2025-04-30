@@ -1,0 +1,8 @@
+[package]
+name = "rs_repro"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+itertools = { version = "0.14.0"}
+tap = "1.0.1"

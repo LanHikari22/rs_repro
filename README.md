@@ -68,4 +68,4 @@ All contributions are welcome! Please feel free to contact me by opening an issu
 
 # License
 
-This theme is licensed under the [MIT license](https://opensource.org/licenses/mit-license.php) © Mohammed Alzakariya.
+This theme is licensed under the [MIT license](https://opensource.org/licenses/mit-license.php) © 2025 Mohammed Alzakariya.

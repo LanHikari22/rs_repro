@@ -1,6 +1,6 @@
 use itertools::Itertools;
 
-fn main() {
+pub fn main() {
     let vect = vec!["A", "B", "C"];
 
     let out = {

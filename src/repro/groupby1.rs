@@ -1,7 +1,7 @@
 use itertools::Itertools;
 use std::collections::HashMap;
 
-fn main() {
+pub fn main() {
     let data = vec![
         ("A", "B"),
         ("A", "C"),
@@ -20,4 +20,3 @@ fn main() {
 }
 
 // [("A", ["B", "C", "D"]), ("E", ["F", "G"])]
-

@@ -1,27 +1,8 @@
-// include!("repro/groupby1.rs");
-// include!("repro/list_tup_to_list1b.rs");
-// include!("repro/error_multilevel_impl_generic2.rs");
+#![allow(unused_imports)]
+#![allow(dead_code)]
 
-// include!("repro/chunk_odds_as_even.rs");
+pub mod repro;
+
 fn main() {
-    let vect = vec!["A", "B", "C"];
-
-    let out = {
-        vect
-            .chunks(2)
-            .map(|chunk| match chunk {
-                [a] => {
-                    (1, a.to_string())
-                },
-                [a, b] => {
-                    (2, format!("{}{}", a, b))
-                },
-                _ => unreachable!()
-            })
-            .collect::<Vec<_>>()
-    };
-
-    println!("{:?}", out);
+    repro::impl_trait_arg1_concrete::main();
 }
-
-// [(2, "AB"), (1, "C")]

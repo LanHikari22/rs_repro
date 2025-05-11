@@ -3,6 +3,7 @@ pub mod chunk_odds_as_even2;
 
 // pub mod error_multilevel_impl_generic1;
 // pub mod error_multilevel_impl_generic2;
+// pub mod error_iter_chain_mut_immut;
 
 pub mod groupby1;
 pub mod impl_trait_arg1_concrete;

@@ -4,5 +4,5 @@
 pub mod repro;
 
 fn main() {
-    repro::chunk_odds_as_even1::main();
+    repro::struct_field_access1::main();
 }

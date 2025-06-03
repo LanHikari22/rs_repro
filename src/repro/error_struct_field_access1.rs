@@ -26,9 +26,9 @@ pub fn main() {
 a.a: 5
 */
 
-// pub fn main_bad1() {
-//     let b = M1::B {a: 5, b: 7};
-// }
+pub fn main_bad1() {
+    let b = M1::B {a: 5, b: 7};
+}
 
 /*
 error[E0603]: struct `B` is private

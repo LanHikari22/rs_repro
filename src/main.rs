@@ -4,5 +4,5 @@
 pub mod repro;
 
 fn main() {
-    repro::struct_field_access1::main();
+    repro::prop_trait_on_vect1::main();
 }

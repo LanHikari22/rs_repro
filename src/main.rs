@@ -20,3 +20,8 @@ fn main() {
 fn main() {
     repro_tracked::repro001_parquet_derive_example::main()
 }
+
+#[cfg(feature = "repro002")]
+fn main() {
+    repro_tracked::repro002_parquet_derive_read_example::main()
+}

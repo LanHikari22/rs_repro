@@ -8,6 +8,7 @@ default = []
 nontracked = []
 repro000 = ["parquet", "parquet_derive"]
 repro001 = ["parquet", "parquet_derive"]
+repro002 = ["parquet", "parquet_derive"]
 
 [dependencies]
 itertools = { version = "0.14.0"}

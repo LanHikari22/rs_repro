@@ -1,8 +1,10 @@
 ///
 /// This is a reproduction of an example from https://docs.rs/parquet_derive/30.0.1/parquet_derive/derive.ParquetRecordWriter.html
 /// It was also referenced in stackoverflow: https://stackoverflow.com/questions/75124404/creating-datafusions-dataframe-from-vecstruct-in-rust/75125062#75125062
-
+/// For development context, see https://github.com/dism-exe/dism-exe-notes/blob/main/lan/llm/weekly/Wk%2025%20003%20Rust%20Parquet%20serialize%20and%20deserialize.md
+/// 
 /// As of 2025-06-21, it is marked "not tested". So here, we test it.
+
 use parquet::file::properties::WriterProperties;
 use parquet::file::writer::SerializedFileWriter;
 
@@ -12,6 +14,7 @@ use parquet_derive::ParquetRecordWriter;
 use std::fs::File;
 
 use std::sync::Arc;
+
 #[derive(ParquetRecordWriter)]
 struct ACompleteRecord<'a> {
     pub a_bool: bool,
@@ -31,7 +34,6 @@ pub fn write_some_records() {
     ];
 
     let schema = samples.as_slice().schema();
-
 
     let props = Arc::new(WriterProperties::builder().build());
 
@@ -92,7 +94,7 @@ help: consider using `Result::expect` to unwrap the `Result<Arc<parquet::schema:
     |                                                         +++++++++++++++++
 
 
-- [ ] (Error3):
+- [OK] (Error3):
 error[E0599]: no method named `close_row_group` found for struct `SerializedFileWriter` in the current scope
    --> src/repro_tracked/repro001_parquet_derive_example.rs:51:12
     |

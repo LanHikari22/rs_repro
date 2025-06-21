@@ -1,8 +1,22 @@
 #![allow(unused_imports)]
 #![allow(dead_code)]
 
+#[cfg(feature = "nontracked")]
 pub mod repro;
 
+pub mod repro_tracked;
+
+#[cfg(feature = "nontracked")]
 fn main() {
-    repro::prop_trait_on_vect1::main();
+    repro_issues::prop_trait_on_vect1::main();
+}
+
+#[cfg(feature = "repro000")]
+fn main() {
+    repro_tracked::repro000_parquet_read_write::repro000::main().unwrap()
+}
+
+#[cfg(feature = "repro001")]
+fn main() {
+    repro_tracked::repro001_parquet_derive_example::main()
 }

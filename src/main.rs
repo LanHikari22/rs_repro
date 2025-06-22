@@ -13,7 +13,7 @@ fn main() {
 
 #[cfg(feature = "repro000")]
 fn main() {
-    repro_tracked::repro000_parquet_read_write::repro000::main().unwrap()
+    repro_tracked::repro000_parquet_read_write::main()
 }
 
 #[cfg(feature = "repro001")]
@@ -24,4 +24,10 @@ fn main() {
 #[cfg(feature = "repro002")]
 fn main() {
     repro_tracked::repro002_parquet_derive_read_example::main()
+}
+
+
+#[cfg(feature = "repro003")]
+fn main() {
+    repro_tracked::repro003_ron_read_write::main()
 }

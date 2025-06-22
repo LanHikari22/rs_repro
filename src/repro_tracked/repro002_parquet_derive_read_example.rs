@@ -1,6 +1,6 @@
 ///
 /// This serves to test the example [ParquestRecordReader](<https://docs.rs/parquet_derive/latest/parquet_derive/derive.ParquetRecordReader.html>)
-/// 
+/// For development context, see https://github.com/dism-exe/dism-exe-notes/blob/main/lan/llm/weekly/Wk%2025%20003%20Rust%20Parquet%20serialize%20and%20deserialize.md
 
 use parquet::record::RecordReader;
 use parquet::file::{serialized_reader::SerializedFileReader, reader::FileReader};

@@ -1,7 +1,19 @@
-use ron::{Error, error::SpannedResult};
 /// Getting RON with type derives and reading/writing a Vec<T> to/from a file.
 /// The development journal can be found at https://github.com/dism-exe/dism-exe-notes/blob/main/lan/llm/weekly/Wk%2025%20000%20Rust%20CSV%20Reader%20Writer%20with%20Derive.md
-///
+/// The below mirrors examples/file_read_write_vec.rs for RON
+/// 
+/// To run this example:
+/// ```sh
+/// git clone https://github.com/LanHikari22/rs_repro.git && cd rs_repro && cargo run --features "repro003"
+/// ```
+
+/// Getting RON with type derives and reading/writing a Vec<T> to/from a file.
+use ron::{
+    Error,
+    de::{Position, SpannedError},
+    error::SpannedResult,
+    ser::PrettyConfig,
+};
 use serde::{Deserialize, Serialize, de::DeserializeOwned};
 use std::{
     fs::File,
@@ -56,26 +68,39 @@ fn create_records() -> Vec<User> {
     ]
 }
 
-// A basic text file format with individual records separated by a magic separator
+/// Serializes a list of T into a string with one record per line
 fn write_ron_vec_to_str<T: Serialize>(records: &[T]) -> Result<String, Error> {
     let mut mut_str = String::new();
 
     let as_strings = {
         records
             .into_iter()
-            // .map(|record| ron::ser::to_string(&record))
-            .map(|record| ron::ser::to_string_pretty(&record, ron::ser::PrettyConfig::default()))
+            .map(|record| {
+                ron::ser::to_string_pretty(
+                    &record,
+                    PrettyConfig::new()
+                        .compact_arrays(true)
+                        .compact_maps(true)
+                        .compact_structs(true)
+                        .escape_strings(true),
+                )
+            })
             .collect::<Result<Vec<_>, _>>()?
     };
 
     as_strings.into_iter().for_each(|s| {
         mut_str.push_str(&s);
-        mut_str.push_str("\n=RON_MGC=\n");
+        mut_str.push_str(if cfg!(not(target_os = "windows")) {
+            "\n"
+        } else {
+            "\r\n"
+        })
     });
 
     Ok(mut_str)
 }
 
+/// Serializes a list of T into a text file with one record per line
 fn write_ron_vec_to_file<T: Serialize>(path: &PathBuf, records: &[T]) -> Result<usize, Error> {
     let mut file = File::create(path)?;
 
@@ -83,31 +108,35 @@ fn write_ron_vec_to_file<T: Serialize>(path: &PathBuf, records: &[T]) -> Result<
         .map_err(|err| Error::Io(err.to_string()))
 }
 
+/// This reader assumes that every row has one entry, so it would not work if they are split across lines.
 fn read_ron_vec_from_str<T: DeserializeOwned>(s: &str) -> SpannedResult<Vec<T>> {
     s //_
-        .split("\n=RON_MGC=\n")
-        .map(|s| s.trim())
-        .filter(|s| !s.is_empty())
+        .lines()
         .map(|s| ron::from_str::<T>(s))
         .collect::<Result<Vec<_>, _>>()
 }
 
-fn read_ron_vec_from_file<T: DeserializeOwned>(path: &PathBuf) -> SpannedResult<Vec<T>> {
+fn read_ron_vec_from_file<T: DeserializeOwned>(path: &PathBuf) -> Result<Vec<T>, Error> {
     let mut file = File::open(path)?;
+
     let mut content = String::new();
 
     file.read_to_string(&mut content)?;
 
-    read_ron_vec_from_str(&content)
+    read_ron_vec_from_str(&content).map_err(|e| e.code)
 }
 
 pub fn main() {
     let users = create_records();
 
-    let path = PathBuf::from_str("example.ron").unwrap();
+    let path = PathBuf::from_str("vec-example.ron").unwrap();
 
     write_ron_vec_to_file(&path, &users).unwrap();
 
     let read_users: Vec<User> = read_ron_vec_from_file(&path).unwrap();
+
+    // Comment this out if you want to view the file:
+    std::fs::remove_file("vec-example.ron").unwrap();
+
     println!("{:?}", read_users);
 }

@@ -1,10 +1,14 @@
+use ron::{Error, error::SpannedResult};
 /// Getting RON with type derives and reading/writing a Vec<T> to/from a file.
 /// The development journal can be found at https://github.com/dism-exe/dism-exe-notes/blob/main/lan/llm/weekly/Wk%2025%20000%20Rust%20CSV%20Reader%20Writer%20with%20Derive.md
-/// 
-
-use serde::{de::DeserializeOwned, Deserialize, Serialize};
-use std::{fs::File, io::{Read, Write}, path::PathBuf, str::FromStr};
-use ron::{error::SpannedResult, Error};
+///
+use serde::{Deserialize, Serialize, de::DeserializeOwned};
+use std::{
+    fs::File,
+    io::{Read, Write},
+    path::PathBuf,
+    str::FromStr,
+};
 
 #[derive(Debug, Deserialize, Serialize)]
 struct MetaData {
@@ -15,9 +19,8 @@ struct MetaData {
 #[derive(Debug, Deserialize, Serialize)]
 enum UserRole {
     User,
-    Admin {key: usize},
+    Admin { key: usize },
 }
-
 
 #[derive(Debug, Deserialize, Serialize)]
 struct User {
@@ -34,15 +37,21 @@ fn create_records() -> Vec<User> {
             name: "Alice".into(),
             email: "alice@example.com".into(),
             comment: "New\nLine, and \"quotes\"".into(),
-            role: UserRole::Admin {key: 0xDEADFEED},
-            meta: MetaData { created_at: "2025-06-22".into(), author: "Admin".to_string() }
+            role: UserRole::Admin { key: 0xDEADFEED },
+            meta: MetaData {
+                created_at: "2025-06-22".into(),
+                author: "Admin".to_string(),
+            },
         },
         User {
             name: "Bob".into(),
             email: "bob@example.com".into(),
             comment: "Tabs\ttoo".into(),
             role: UserRole::User,
-            meta: MetaData { created_at: "2025-06-22".into(), author: "Admin".to_string() }
+            meta: MetaData {
+                created_at: "2025-06-22".into(),
+                author: "Admin".to_string(),
+            },
         },
     ]
 }
@@ -55,19 +64,14 @@ fn write_ron_vec_to_str<T: Serialize>(records: &[T]) -> Result<String, Error> {
         records
             .into_iter()
             // .map(|record| ron::ser::to_string(&record))
-            .map(|record| ron::ser::to_string_pretty(
-                &record, 
-                ron::ser::PrettyConfig::default()
-            ))
+            .map(|record| ron::ser::to_string_pretty(&record, ron::ser::PrettyConfig::default()))
             .collect::<Result<Vec<_>, _>>()?
     };
 
-    as_strings
-        .into_iter()
-        .for_each(|s| {
-            mut_str.push_str(&s);
-            mut_str.push_str("\n=RON_MGC=\n");
-        });
+    as_strings.into_iter().for_each(|s| {
+        mut_str.push_str(&s);
+        mut_str.push_str("\n=RON_MGC=\n");
+    });
 
     Ok(mut_str)
 }

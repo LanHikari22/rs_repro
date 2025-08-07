@@ -1,8 +1,11 @@
 
 // TODO
 
-#[cfg(feature = "repro003")]
-pub mod repro003_ron_read_write;
+#[cfg(feature = "repro004")]
+pub mod repro004_regex_tester;
+
+#[cfg(feature = "repro005")]
+pub mod repro005_cust_chunk_no_type;
 
 // Done
 
@@ -14,6 +17,9 @@ pub mod repro002_parquet_derive_read_example;
 
 #[cfg(feature = "repro000")]
 pub mod repro000_parquet_read_write;
+
+#[cfg(feature = "repro003")]
+pub mod repro003_ron_read_write;
 
 
 // Archived

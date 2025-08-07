@@ -34,7 +34,9 @@ crates if any and is made to be built fast on demand for demonstration purposes.
 
 # Contributing
 
-All contributions are welcome! Please feel free to contact me by opening an issue ticket or emailing lanhikarixx@gmail.com if you want to chat. Just start the title with "GITCHAT".
+All contributions are welcome! 
+
+Please feel free to contact me by opening an issue ticket or emailing lanhikarixx@gmail.com if you want to chat. Just start the title with "GITCHAT".
 
 # License
 

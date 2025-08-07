@@ -4,6 +4,12 @@
 /// For development context, see https://github.com/dism-exe/dism-exe-notes/blob/main/lan/llm/weekly/Wk%2025%20003%20Rust%20Parquet%20serialize%20and%20deserialize.md
 ///
 /// As of 2025-06-21, it is marked "not tested". So here, we test it.
+///
+/// To run this example:
+/// ```sh
+/// git clone https://github.com/LanHikari22/rs_repro.git && cd rs_repro && cargo run --features "repro001"
+/// ```
+/// 
 
 /// see mod fix_2025_06_21 for commentary on the fix. Below is code as it exists in the example via [#7733](<https://github.com/apache/arrow-rs/pull/7733>)
 use parquet::file::properties::WriterProperties;

@@ -1,5 +1,5 @@
 {
   "rust-analyzer.cargo.features": [
-    "repro005"
+    "repro004"
   ]
 }

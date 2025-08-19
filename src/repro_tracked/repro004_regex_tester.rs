@@ -1,6 +1,6 @@
 use clap::{Arg, ArgAction, ArgMatches, Command, command};
-use regex::Regex;
 use lan_rs_common::util::regex as comm_regex;
+use regex::Regex;
 
 fn parse_args() -> ArgMatches {
     command!()
@@ -34,10 +34,12 @@ pub fn main() {
 
     let re = Regex::new(&regex).expect("Invalid regex");
 
-    let matches = comm_regex::regex_capture_once(&str, &re).expect("Could not parse regex");
-
     println!("regex: {regex}");
     println!("str: {str}");
-    println!("matches: {matches:?}");
 
+    let matches = //_
+        comm_regex::regex_capture_once(&str, &re)
+            .expect("Could not parse regex");
+
+    println!("matches: {matches:?}");
 }

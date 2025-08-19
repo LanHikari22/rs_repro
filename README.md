@@ -21,8 +21,8 @@
 
 - [What is this?](#what-is-this)
 - [Contributing](#contributing)
+- [Support](#support)
 - [License](#license)
-
 
 # What is this?
 
@@ -38,6 +38,12 @@ All contributions are welcome!
 
 Please feel free to contact me by opening an issue ticket or emailing lanhikarixx@gmail.com if you want to chat. Just start the title with "GITCHAT".
 
+# Support
+
+If this project brings value to you, please consider supporting me with a monthly subscription or [buying me a coffee](https://buymeacoffee.com/lan22h).
+
+Your support would greatly help me to create new tools or improve existing ones!
+
 # License
 
-This theme is licensed under the [MIT license](https://opensource.org/licenses/mit-license.php) © 2025 Mohammed Alzakariya.
+This work is licensed under the [MIT license](https://opensource.org/licenses/mit-license.php) © 2025 Mohammed Alzakariya.

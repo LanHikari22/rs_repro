@@ -32,5 +32,5 @@ fn main() {
     repro_tracked::repro005_cust_chunk_no_type::main();
 
     #[cfg(feature = "repro006")]
-    repro_tracked::repro006_sluggify_and_github_slugger::main();
+    repro_tracked::repro006_slug_and_github_slugger::main();
 }

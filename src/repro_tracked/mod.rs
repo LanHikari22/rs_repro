@@ -8,7 +8,7 @@ pub mod repro004_regex_tester;
 pub mod repro005_cust_chunk_no_type;
 
 #[cfg(feature = "repro006")]
-pub mod repro006_sluggify_and_github_slugger;
+pub mod repro006_slug_and_github_slugger;
 
 // Done
 

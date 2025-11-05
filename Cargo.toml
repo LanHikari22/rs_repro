@@ -6,6 +6,7 @@ edition = "2024"
 [dependencies]
 itertools = { version = "0.14.0", optional = true }
 tap = { version = "1.0.1", optional = true }
+thiserror = { version = "2.0.16", optional = true }
 
 parquet = { version = "55.1.0", optional = true }
 parquet_derive = { version = "55.1.0", optional = true }
@@ -30,6 +31,6 @@ repro000 = ["parquet", "parquet_derive"]
 repro001 = ["parquet", "parquet_derive"]
 repro002 = ["parquet", "parquet_derive"]
 repro003 = ["ron", "serde"]
-repro004 = ["clap", "regex", "lan_rs_common"]
+repro004 = ["clap", "regex", "thiserror"]
 repro005 = []
 repro006 = ["slug", "github-slugger"]

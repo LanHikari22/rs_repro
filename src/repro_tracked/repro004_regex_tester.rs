@@ -43,12 +43,6 @@ fn parse_args() -> ArgMatches {
     command!()
         .arg(Arg::new("regex").required(true))
         .arg(Arg::new("str").required(true))
-        .arg(
-            Arg::new("verbose")
-                .help("1: info, 2: debug, 3: trace")
-                .short('v')
-                .action(ArgAction::Count),
-        )
         .get_matches()
 }
 

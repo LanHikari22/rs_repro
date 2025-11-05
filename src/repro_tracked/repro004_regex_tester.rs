@@ -9,12 +9,9 @@ pub enum RegexCaptureOnceError {
 
     #[error("Failed to capture for regex {1:?} and string {0:?}")]
     CaptureError(String, String),
-
-    #[error("Failed to collect capture groups for regex {1:?} and string {0:?}")]
-    CaptureCollectError(String, String),
 }
 
-pub fn regex_capture_once(s: &str, re: &Regex) -> Result<Vec<String>, RegexCaptureOnceError> {
+pub fn regex_capture_once(s: &str, re: &Regex) -> Result<Vec<Option<String>>, RegexCaptureOnceError> {
     type FnErr = RegexCaptureOnceError;
 
     if !re.is_match(s) {
@@ -27,16 +24,15 @@ pub fn regex_capture_once(s: &str, re: &Regex) -> Result<Vec<String>, RegexCaptu
             s.to_owned(),
             re.as_str().to_owned(),
         ))?
-        .iter().collect::<Option<Vec<_>>>()
-        .ok_or(FnErr::CaptureCollectError(
-            s.to_owned(),
-            re.as_str().to_owned(),
-        ))?;
+        .iter()
+        .map(|opt| {
+            opt.and_then(|mtch| {
+                Some(mtch.as_str().to_owned())
+            })
+        })
+        .collect::<Vec<Option<String>>>();
 
-    Ok(matches
-        .into_iter()
-        .map(|m| m.as_str().to_owned())
-        .collect::<Vec<_>>())
+    Ok(matches)
 }
 
 fn parse_args() -> ArgMatches {
